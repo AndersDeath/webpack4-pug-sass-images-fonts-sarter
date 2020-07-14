@@ -5,7 +5,9 @@ function requireAll(r) {
 import html from "./index.pug";
 import style from "./styles/main.scss";
 import script from "./scripts/plugin.js";
-requireAll(require.context("./images/", true, /\.(png|jpe?g|gif)$/));
-requireAll(require.context("./fonts/", true, /\.(eot|ttf|woff2?|otf)$/));
+requireAll(require.context("./img/", true, /\.(png|jpe?g|gif|svg)$/));
+requireAll(
+  require.context("./fonts/", true, /\.(eot|ttf|woff2|woff|otf|svg)$/)
+);
 
 console.log("App loaded");

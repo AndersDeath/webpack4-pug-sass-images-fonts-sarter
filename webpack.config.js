@@ -2,8 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -12,30 +11,43 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        use: ["html-loader", "pug-html-loader"],
+        use: ["html-loader?attrs=false", "pug-html-loader"],
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+          "postcss-loader",
+        ],
       },
       {
-        test: /\.(png|jpe?g|gif)$/,
+        test: /\.(png|jpe?g|gif|svg)$/,
+        exclude: "/src/fonts/",
         loader: "file-loader",
         options: {
-          name: "[name].[ext]",
-          publicPath: "images",
-          outputPath: "images",
-          useRelativePath: true,
+          name: "[path][name].[ext]",
+          context: "src",
         },
       },
       {
-        test: /\.(eot|ttf|woff2?|otf)$/,
+        test: /\.(eot|ttf|woff|woff2|otf)$/,
+        exclude: "/src/img/",
         loader: "file-loader",
         options: {
-          name: "[name].[ext]",
-          publicPath: "fonts",
-          outputPath: "fonts",
-          useRelativePath: true,
+          name: "[path][name].[ext]",
+          context: "src",
+          limit: false,
+        },
+      },
+      {
+        test: /\.(css)$/,
+        loader: "file-loader",
+        options: {
+          name: "[path][name].[ext]",
+          context: "src",
+          limit: false,
         },
       },
     ],
