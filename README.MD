@@ -1,6 +1,6 @@
 # Starter for html pages developing.
 
-## What is inside?
+## What are inside?
 
 - Webpack 4
 - Pug
